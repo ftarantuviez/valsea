@@ -6,6 +6,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import PersonPage from "./pages/PersonPage";
 import HomePage from "./pages/HomePage";
 import "./globals.css";
+import { Layout } from "./ui/Layout";
 
 const client = createClient({
   url: "https://swapi-graphql.netlify.app/.netlify/functions/index",
@@ -13,12 +14,18 @@ const client = createClient({
 
 const router = createBrowserRouter([
   {
-    path: "/",
-    element: <HomePage />,
-  },
-  {
-    path: "/person/:personId",
-    element: <PersonPage />,
+    path: "",
+    children: [
+      {
+        path: "",
+        element: <HomePage />,
+      },
+      {
+        path: "person/:personId",
+        element: <PersonPage />,
+      },
+    ],
+    element: <Layout />,
   },
 ]);
 
